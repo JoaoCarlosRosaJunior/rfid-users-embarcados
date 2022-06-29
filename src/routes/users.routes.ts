@@ -37,7 +37,7 @@ usersRoutes.post(
 );
 
 usersRoutes.get(
-  '/',
+  '/:id_tag',
   async (request: Request, response: Response): Promise<Response> => {
     const { id_tag } = request.params;
 
