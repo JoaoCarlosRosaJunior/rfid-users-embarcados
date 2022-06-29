@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import 'reflect-metadata';
 import express from 'express';
-import './shared/container';
 import './database';
 import { router } from './routes';
 import cors from 'cors';
