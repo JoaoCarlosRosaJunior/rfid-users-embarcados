@@ -53,7 +53,7 @@ usersRoutes.get(
   },
 );
 
-usersRoutes.patch(
+usersRoutes.put(
   '/update/active',
   async (request: Request, response: Response): Promise<Response> => {
     const { active, id_tag } = request.body;
