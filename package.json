@@ -1,8 +1,11 @@
 {
-  "name": "mussum-academy",
+  "name": "rfid-embarcados",
   "version": "1.0.0",
   "main": "app.ts",
   "license": "MIT",
+  "engines": {
+    "node":"14.18.1"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev --inspect --transpileOnly --ignore-watch node_modules src/server.ts",
