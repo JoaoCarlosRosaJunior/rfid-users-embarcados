@@ -12,7 +12,7 @@ usersRoutes.post(
     console.log('chegou aqui 1');
     const { id_tag, name, permission, github_link, active } = request.body;
     console.log('chegou aqui 2');
-    if (!id_tag || !name || !permission || !github_link || !active) {
+    if (!id_tag || !name || !permission || !github_link) {
       return response
         .status(400)
         .send({ message: 'Parâmetros do request inválidos.' });
@@ -71,7 +71,7 @@ usersRoutes.patch(
         })
         .returning('*')
         .execute();
-      return response.status(200).send({ update: updatedUser.raw });
+      return response.status(200).send({ update: updatedUser });
     } catch (error) {
       return response.status(400).send(error);
     }
