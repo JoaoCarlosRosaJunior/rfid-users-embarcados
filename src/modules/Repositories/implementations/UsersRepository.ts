@@ -24,7 +24,7 @@ class UsersRepository implements IUserRepository {
       github_link,
       active,
     });
-
+    console.log('chegou aqui 5');
     await this.repository.save(userTag);
   }
 

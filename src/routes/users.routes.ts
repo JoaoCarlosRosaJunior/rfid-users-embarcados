@@ -8,15 +8,17 @@ const usersRoutes = Router();
 usersRoutes.post(
   '/',
   async (request: Request, response: Response): Promise<Response> => {
+    console.log('chegou aqui 1');
     const { id_tag, name, permission, github_link, active } = request.body;
-
+    console.log('chegou aqui 2');
     if (!id_tag || !name || !permission || !github_link || !active) {
       return response
         .status(400)
         .send({ message: 'Parâmetros do request inválidos.' });
     }
-
+    console.log('chegou aqui 3');
     const usersRepository = new UsersRepository();
+    console.log('chegou aqui 4');
 
     await usersRepository.create({
       id_tag,
@@ -25,7 +27,7 @@ usersRoutes.post(
       github_link,
       active,
     });
-
+    console.log('chegou aqi 6');
     return response
       .status(200)
       .send({ message: `User ${name} save with sucess` });
