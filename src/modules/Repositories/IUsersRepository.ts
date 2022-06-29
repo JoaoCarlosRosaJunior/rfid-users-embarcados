@@ -1,4 +1,4 @@
-import { User } from '../entities/User';
+import { User } from '../models/User';
 
 // New concept: DTO => Data to Transfer. É quando recebemos dados de request e transformamos em objeto para conversar com outros repositorios
 interface ICreateUserDTO {
