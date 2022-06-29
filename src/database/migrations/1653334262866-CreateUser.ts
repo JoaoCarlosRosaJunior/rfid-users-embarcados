@@ -13,7 +13,7 @@ export class CreateUsers1653334262866 implements MigrationInterface {
           },
           {
             name: 'id_tag',
-            type: 'string',
+            type: 'varchar',
           },
           {
             name: 'name',
