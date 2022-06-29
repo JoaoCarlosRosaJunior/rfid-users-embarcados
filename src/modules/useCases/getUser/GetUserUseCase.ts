@@ -1,20 +1,20 @@
-import { UsersRepository } from "../../Repositories/implementations/UsersRepository";
-import { IUserRepository } from "../../Repositories/IUsersRepository";
-import { inject, injectable } from "tsyringe";
-import { User } from "../../entities/User";
+import { UsersRepository } from '../../Repositories/implementations/UsersRepository';
+import { IUserRepository } from '../../Repositories/IUsersRepository';
+import { inject, injectable } from 'tsyringe';
+import { User } from '../../entities/User';
 
 @injectable()
 class GetUserUseCase {
   constructor(
     @inject(UsersRepository)
-    private usersRepository: IUserRepository
+    private usersRepository: IUserRepository,
   ) {}
 
-  async execute({ id_tag }): Promise<User> {
+  async execute(id_tag: string): Promise<User> {
     const user = await this.usersRepository.findByID(id_tag);
 
     if (!user) {
-      throw new Error("Id tag not found");
+      throw new Error('Id tag not found');
     }
 
     return user;
