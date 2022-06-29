@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { Request, Response } from 'express';
-import { UsersRepository } from '../modules/Repositories/implementations/UsersRepository';
-import { User } from '../modules/models/User';
+import { UsersRepository } from '../Repositories/implementations/UsersRepository';
+import { User } from '../models/User';
 import { getCustomRepository, getRepository } from 'typeorm';
 
 const usersRoutes = Router();
