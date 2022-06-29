@@ -56,13 +56,11 @@ usersRoutes.get(
 usersRoutes.patch(
   '/update/tag',
   async (request: Request, response: Response): Promise<Response> => {
-    const { id_tag } = request.body;
+    const { id_tag, nome } = request.body;
 
     const usersRepository = getRepository(User);
 
-    const user: any = await usersRepository.findOne({ id_tag });
-
-    const updatedUser = await usersRepository.update(user.id, { id_tag });
+    const updatedUser = await usersRepository.update(nome, { id_tag });
 
     return response.status(200).send({ update: updatedUser });
   },
