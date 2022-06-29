@@ -56,11 +56,18 @@ usersRoutes.get(
 usersRoutes.patch(
   '/update/tag',
   async (request: Request, response: Response): Promise<Response> => {
-    const { id_tag, nome } = request.body;
+    const { id_tag, name } = request.body;
 
     const usersRepository = getRepository(User);
 
-    const updatedUser = await usersRepository.update(nome, { id_tag });
+    const updatedUser = await usersRepository
+      .createQueryBuilder()
+      .update({
+        id_tag,
+      })
+      .where({
+        name,
+      });
 
     return response.status(200).send({ update: updatedUser });
   },
