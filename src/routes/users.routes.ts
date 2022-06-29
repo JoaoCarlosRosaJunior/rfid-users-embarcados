@@ -78,4 +78,15 @@ usersRoutes.patch(
   },
 );
 
+usersRoutes.get(
+  '/active',
+  async (request: Request, response: Response): Promise<Response> => {
+    const usersRepository = getRepository(User);
+
+    const activeTags = await usersRepository.find({ active: true });
+
+    return response.status(200).send({ activeTags: activeTags });
+  },
+);
+
 export { usersRoutes };
