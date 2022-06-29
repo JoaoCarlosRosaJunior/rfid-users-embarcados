@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { Request, Response } from 'express';
 import { UsersRepository } from '../modules/Repositories/implementations/UsersRepository';
 import { User } from '../modules/models/User';
-import { getCustomRepository } from 'typeorm';
+import { getCustomRepository, getRepository } from 'typeorm';
 
 const usersRoutes = Router();
 
@@ -18,15 +18,17 @@ usersRoutes.post(
         .send({ message: 'Parâmetros do request inválidos.' });
     }
     console.log('chegou aqui 3');
-    const usersRepository = getCustomRepository(UsersRepository);
-
-    await usersRepository.createUser({
+    const usersRepository = getRepository(User);
+    console.log(4);
+    const user = await usersRepository.create({
       id_tag,
       name,
       permission,
       github_link,
       active,
     });
+
+    await usersRepository.save(user);
     console.log('chegou aqi 6');
     return response
       .status(200)
@@ -39,9 +41,9 @@ usersRoutes.get(
   async (request: Request, response: Response): Promise<Response> => {
     const { id_tag } = request.params;
 
-    const usersRepository = getCustomRepository(UsersRepository);
+    const usersRepository = getRepository(User);
 
-    const user = await usersRepository.findByID(id_tag);
+    const user = await usersRepository.findOne({ id_tag });
 
     if (!user) {
       return response.status(400).send({ message: 'Id tag not found' });
