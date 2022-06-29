@@ -12,7 +12,7 @@ interface ICreateUserDTO {
 interface IUserRepository {
   findByName(name: String): Promise<User | any>;
   list(): Promise<User[]>;
-  create({
+  createUser({
     id_tag,
     name,
     permission,

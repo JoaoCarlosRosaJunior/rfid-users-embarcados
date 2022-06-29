@@ -1,16 +1,13 @@
-import { getRepository, Repository } from 'typeorm';
+import { EntityRepository, getRepository, Repository } from 'typeorm';
 import { User } from '../../models/User';
 
 import { IUserRepository, ICreateUserDTO } from '../IUsersRepository';
 
-class UsersRepository implements IUserRepository {
+@EntityRepository(User)
+class UsersRepository extends Repository<User> implements IUserRepository {
   private repository: Repository<User>;
 
-  constructor() {
-    this.repository = getRepository(User);
-  }
-
-  async create({
+  async createUser({
     id_tag,
     name,
     permission,
