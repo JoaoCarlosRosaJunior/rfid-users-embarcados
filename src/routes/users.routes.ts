@@ -60,16 +60,21 @@ usersRoutes.patch(
 
     const usersRepository = getRepository(User);
 
-    const updatedUser = await usersRepository
-      .createQueryBuilder()
-      .update({
-        id_tag,
-      })
-      .where({
-        name,
-      });
-
-    return response.status(200).send({ update: updatedUser });
+    try {
+      const updatedUser = await usersRepository
+        .createQueryBuilder()
+        .update({
+          id_tag,
+        })
+        .where({
+          name,
+        })
+        .returning('*')
+        .execute();
+      return response.status(200).send({ update: updatedUser });
+    } catch (error) {
+      return response.status(400).send(error);
+    }
   },
 );
 
