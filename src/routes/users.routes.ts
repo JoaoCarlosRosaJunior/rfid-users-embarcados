@@ -56,7 +56,7 @@ usersRoutes.get(
 usersRoutes.patch(
   '/update/active',
   async (request: Request, response: Response): Promise<Response> => {
-    const { active, name } = request.body;
+    const { active, id_tag } = request.body;
 
     const usersRepository = getRepository(User);
 
@@ -67,11 +67,11 @@ usersRoutes.patch(
           active,
         })
         .where({
-          name,
+          id_tag,
         })
         .returning('*')
         .execute();
-      return response.status(200).send({ update: updatedUser });
+      return response.status(200).send({ update: updatedUser.raw });
     } catch (error) {
       return response.status(400).send(error);
     }
