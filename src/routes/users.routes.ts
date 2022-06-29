@@ -54,9 +54,9 @@ usersRoutes.get(
 );
 
 usersRoutes.patch(
-  '/update/tag',
+  '/update/active',
   async (request: Request, response: Response): Promise<Response> => {
-    const { id_tag, name } = request.body;
+    const { active, name } = request.body;
 
     const usersRepository = getRepository(User);
 
@@ -64,14 +64,14 @@ usersRoutes.patch(
       const updatedUser = await usersRepository
         .createQueryBuilder()
         .update({
-          id_tag,
+          active,
         })
         .where({
           name,
         })
         .returning('*')
         .execute();
-      return response.status(200).send({ update: updatedUser });
+      return response.status(200).send({ update: updatedUser.raw });
     } catch (error) {
       return response.status(400).send(error);
     }
