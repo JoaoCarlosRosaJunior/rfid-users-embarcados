@@ -1,24 +1,20 @@
-import { Router } from 'express';
-import { Request, Response } from 'express';
+/* eslint-disable @typescript-eslint/camelcase */
+import { Router, Request, Response } from 'express';
+import { getRepository } from 'typeorm';
 import { User } from '../models/User';
-import { getCustomRepository, getRepository } from 'typeorm';
 
 const usersRoutes = Router();
 
 usersRoutes.post(
   '/',
   async (request: Request, response: Response): Promise<Response> => {
-    console.log('chegou aqui 1');
     const { id_tag, name, permission, github_link, active } = request.body;
-    console.log('chegou aqui 2');
     if (!id_tag || !name || !permission || !github_link) {
       return response
         .status(400)
         .send({ message: 'Parâmetros do request inválidos.' });
     }
-    console.log('chegou aqui 3');
     const usersRepository = getRepository(User);
-    console.log(4);
     const user = await usersRepository.create({
       id_tag,
       name,
@@ -59,6 +55,29 @@ usersRoutes.put(
 
     const usersRepository = getRepository(User);
 
+    if (id_tag === 'all') {
+      const allUsers = await usersRepository.find();
+
+      const usersIdsTags = allUsers.map(user => {
+        return user.id_tag;
+      });
+
+      usersIdsTags.forEach(async tag => {
+        const updateId = await usersRepository
+          .createQueryBuilder()
+          .update({
+            active,
+          })
+          .where({
+            tag,
+          })
+          .returning('*')
+          .execute();
+      });
+
+      return response.status(200).send({ message: 'all users desacitved' });
+    }
+
     try {
       const updatedUser = await usersRepository
         .createQueryBuilder()
@@ -84,7 +103,7 @@ usersRoutes.get(
 
     const activeTags = await usersRepository.find({ active: true });
 
-    return response.status(200).send({ activeTags: activeTags });
+    return response.status(200).send({ activeTags });
   },
 );
 

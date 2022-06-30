@@ -2,8 +2,8 @@ import dotenv from 'dotenv';
 import 'reflect-metadata';
 import express from 'express';
 import './database';
-import { router } from './routes';
 import cors from 'cors';
+import { router } from './routes';
 
 const app = express();
 
