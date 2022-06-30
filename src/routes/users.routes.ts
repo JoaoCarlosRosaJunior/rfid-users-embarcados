@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { Request, Response } from 'express';
-import { UsersRepository } from '../Repositories/implementations/UsersRepository';
 import { User } from '../models/User';
 import { getCustomRepository, getRepository } from 'typeorm';
 
