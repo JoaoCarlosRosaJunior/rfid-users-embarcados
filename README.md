@@ -34,10 +34,13 @@ e ele poderá passar.
       - permission: string
       
     Observações: A coluna "id_tag" armazena o valor do id da tag lida pelo módulo RFID do arduino, e a coluna "github_link" armazena o link do github do usuário 
-    para fazer o display de sua foto no front-end enquanto ele passa pela catraca
+    para fazer o display de sua foto no front-end enquanto ele passa pela catraca.
+    
   3. ### Heroku
     O Heroku foi utilizado para fazer deploy do banco de dados e da API
     
  - ## Código em C do arduino e do Front.
  https://github.com/igorsalbr/embarcados
+ 
+ - Para mais detalhes do projeto basta acessar o arquivo "Sistema_embarcados.pdf"
 
