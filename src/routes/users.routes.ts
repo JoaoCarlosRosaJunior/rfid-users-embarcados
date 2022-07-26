@@ -53,7 +53,7 @@ usersRoutes.put(
   async (request: Request, response: Response): Promise<Response> => {
     const { active, id_tag } = request.body;
 
-    console.log(id_)
+    console.log(id_tag)
 
     const usersRepository = getRepository(User);
 
