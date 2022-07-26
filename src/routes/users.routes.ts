@@ -53,6 +53,8 @@ usersRoutes.put(
   async (request: Request, response: Response): Promise<Response> => {
     const { active, id_tag } = request.body;
 
+    console.log(id_)
+
     const usersRepository = getRepository(User);
 
     if (id_tag === 'all') {
